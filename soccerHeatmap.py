@@ -35,6 +35,13 @@ if __name__ == "__main__":
     gmap = gmplot.GoogleMapPlotter(lat[0], lon[0], 20)
     gmap.heatmap(lat, lon)
 
-    gmap.apikey = "insert your key here"
+    with open('/home/dalri/Documents/key.txt') as fp:
+        line = fp.readline()
+        while line:
+            if (line.split(';')[0] == 'googlemapskey'):
+                TOKEN = line.split(';')[1]
+            line = fp.readline()
+
+    gmap.apikey = TOKEN
 
     gmap.draw("heatmaps/"+name+".html")
